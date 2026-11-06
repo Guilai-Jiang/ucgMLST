@@ -1,0 +1,52 @@
+{% set version = "1.0.0" %}
+
+package:
+  name: ucgmlst
+  version: {{ version }}
+
+source:
+  path: ../../ucgmlst
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  entry_points:
+    - ucgmlst = ucgmlst.cli:main
+
+requirements:
+  host:
+    - python >=3.9
+    - pip
+    - setuptools
+  run:
+    - python >=3.9
+    - numpy
+    - pandas
+    - numba
+    - biopython
+    - click
+    - blast >=2.14
+    - diamond >=2.2
+
+test:
+  imports:
+    - ucgmlst
+  commands:
+    - ucgmlst --version
+    - ucgmlst --help
+
+about:
+  home: https://github.com/Guilai-Jiang/ucgMLST
+  license: GPL-3.0-or-later
+  license_family: GPL3
+  license_file:
+    - LICENSE
+    - COPYING
+  summary: Updated core-genome MLST and HierCC assignment for Gram-positive cocci
+  dev_url: https://github.com/Guilai-Jiang/ucgMLST
+
+extra:
+  recipe-maintainers:
+    - Guilai-Jiang
+    - zheminzhou

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ucgmlst"
+dynamic = ["version"]
+description = "Updated core-genome MLST and HierCC assignment for Gram-positive cocci"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE", "COPYING"]
+authors = [
+    { name = "Guilai Jiang", email = "gljiang@alu.suda.edu.cn" },
+    { name = "Zhemin Zhou" },
+]
+dependencies = ["numpy", "pandas", "numba", "biopython", "click"]
+
+[project.scripts]
+ucgmlst = "ucgmlst.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "ucgmlst.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["ucgmlst*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
